@@ -27,10 +27,29 @@
         <h2>Download Your Free Starter Programs</h2>
         <p>Get the first 2-3 weeks of our sport-specific training programs for free! Enter your email to access the downloads and start your journey with Nomadic Performance.</p>
         
-        <form id="download-form" action="https://script.google.com/macros/s/AKfycbwTXtOL7m43saXAisB6lqK6KOCOcKddEIXtV91Jef18ps4qB0o4jUWCAil5y0EOX-ju3A/exec" method="POST">
+        <form id="download-form" action="https://script.google.com/macros/s/AKfycbxkibidkQNWXvIrIX4BnK-pWhMcVryUKg3mgmhs1G-Pln3aGUOM3sAwIMzomfC-uzbqUQ/exec" method="POST">
             <input type="email" id="email" name="email" placeholder="Your Email" required>
             <button type="submit">Get My Free Programs</button>
         </form>
+        
+        <script>
+          const form = document.getElementById('download-form');
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = new FormData(form);
+            fetch(form.action, {
+              method: 'POST',
+              body: data
+            }).then(response => {
+              if (response.ok) {
+                alert("Thank you! Check your email for your free programs.");
+                form.reset();
+              } else {
+                alert("There was an issue. Please try again.");
+              }
+            }).catch(error => alert("Error: " + error));
+          });
+        </script>
 
         <div id="downloads" style="display:none; margin-top: 20px;">
             <h3>Your Free Downloads:</h3>
