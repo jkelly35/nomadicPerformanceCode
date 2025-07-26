@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Starter Programs - Nomadic Performance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Media/logo1.png" alt="Nomadic Performance Logo">
+            <h1>Nomadic Performance</h1>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="programs.html">Programs</a>
+            <a href="blog.html">Blog</a>
+            <a href="free-programs.html">Free Programs</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Download Your Free Starter Programs</h2>
+        <p>Get the first 2-3 weeks of our sport-specific training programs for free! Enter your email to access the downloads and start your journey with Nomadic Performance.</p>
+        
+        <form id="download-form" action="https://your-web-app-url" method="POST">
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <button type="submit">Get My Free Programs</button>
+        </form>
+
+        <div id="downloads" style="display:none; margin-top: 20px;">
+            <h3>Your Free Downloads:</h3>
+            <ul>
+                <li><a href="FreeTrainingPrograms/Hiker_Prep_Program.pdf" target="_blank">Ski/Snowboard Starter Program</a></li>
+                <li><a href="FreeTrainingPrograms/Mountain_Biking_Season_Prep_Program_Branded.pdf" target="_blank">Rock Climbing Starter Program</a></li>
+                <li><a href="FreeTrainingPrograms/Rock_Climbing_Season_Prep_Program_Branded.pdf" target="_blank">Mountain Biking Starter Program</a></li>
+                <li><a href="/FreeTrainingPrograms/Ski_Snowboard_Season_Prep_Program_Branded.pdf" target="_blank">Trail Running Starter Program</a></li>
+                <li><a href="FreeTrainingPrograms/Trail_Running_Season_Prep_Program_Branded.pdf" target="_blank">Van-Life Adventurer Starter Program</a></li>
+                <li><a href="FreeTrainingPrograms/Van_Life_Adventurer_Season_Prep_Program_Branded.pdf" target="_blank">Hiker Starter Program</a></li>  
+                <li><a href="FreeTrainingPrograms/Hiker_Prep_Program.pdf" target="_blank">Hiker Prep Program</a></li>
+                
+        
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Nomadic Performance | Live Free, Thrive Wild</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('download-form');
+        const downloads = document.getElementById('downloads');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Simulate success message for now
+            form.style.display = 'none';
+            downloads.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
