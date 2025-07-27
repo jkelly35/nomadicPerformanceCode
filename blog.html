@@ -1,12 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Nomadic Performance</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+
     <header>
         <div class="logo">
             <img src="Media/logo1.png" alt="Nomadic Performance Logo">
@@ -23,6 +18,7 @@
         </nav>
     </header>
 
+
     <section class="hero">
         <div="hero-content">
             <h2>Nomadic Performance Blog</h2>
@@ -30,49 +26,63 @@
             <a href="contact.html" class="cta-button">Get in Touch</a>
         </div>
     </section>
-    <section class="content">
-        <h2>Latest Content</h2>
-        <p>Check out our latest posts for expert tips, training advice, and insights into staying active and healthy while enjoying the great outdoors.</p>
-        <p>Whether you're a climber, skier, mountain biker, or just love exploring nature, our blog has something for you.</p>
-        <p>From injury prevention strategies to performance optimization techniques, we cover a wide range of topics to help you thrive in your outdoor pursuits.</p>
-        <p>Don't forget to subscribe to our newsletter for regular updates and exclusive content!</p>
-    </section>
-    <section class="hero">
+   
+    <section class="highlights">
         <h2>Nomadic Performance</h2>
         <p>Discover our most popular posts that provide valuable insights and practical advice for outdoor athletes, and Adventurers.</p>
         <div class="blog-list">
-    
-            <article class="blog-post">
-                <h3><a href="BlogPosts/blog-hiker-vanlife.html">Top 5 Exercises for Hikers and Van-Life Adventurers</a></h3>
-                <p>Discover essential exercises to stay strong and mobile whether you're hitting the trails or living on the road.</p>
-                <a href="BlogPosts/blog-trail-recovery.html" 
-            </article>
-        <div>
-            <article class="blog-post">
-                <h3><a href="BlogPosts/blog-trail-recovery.html">Trail Recovery Tips</a></h3>
-                <p>Learn how to recover faster after long hikes and trail runs with these simple strategies.</p>
-                <a href="BlogPosts/blog-trail-recovery.html" 
-            </article>
-        </div>
-        <div>
-            <article class="blog-post">
-                <h3><a href="BlogPosts/blog-vanlife-mobility.html">Van-Life Mobility Routines</a></h3>
-                <p>Daily mobility drills designed for adventurers living on the road to stay loose and pain-free.</p>
-                <a href="BlogPosts/blog-vanlife-mobility.html" 
-            </article>
-        </div?
-        <div>
-            <article class="blog-post">
-                <h3><a href="BlogPosts/REDs in climbers.pdf">Climber Strength Training</a></h3>
-                <p>Essential strength training exercises to improve your climbing performance and prevent injuries.</p>
-                <a href="BlogPosts/blog-climber-strength.html" 
-            </article>
-        </div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Nomadic Performance</title>
+    <link rel="stylesheet" href="style.css">
     </section>
 
+</head>
+<body>
+    <section class="blog-categories">
+        <button class="category-btn active" data-category="all">All</button>
+        <button class="category-btn" data-category="skiing">Skiing</button>
+        <button class="category-btn" data-category="climbing">Climbing</button>
+        <button class="category-btn" data-category="hiking">Hiking</button>
+        <button class="category-btn" data-category="snowboarding">Snowboarding</button>
+        <button class="category-btn" data-category="biking">Mountain Biking</button>
+    </section>
+
+    <section class="blog-section">
+        <div class="blog-card" data-category="climbing">
+            <img src="/Media/tiredRockClimber.png" alt="REDs in Climbing">
+            <div class="blog-card-content">
+                <h3>Fueling Your Climbing: Why Energy Balance Matters More Than You Think</h3>
+                <p>Understanding Relative Energy Deficiency in Climbing.</p>
+                <a href="BlogPosts/REDsInClimbing.html" class="read-more">Read More</a>
+            </div>
+        </div>
+
+    </section>
 
     <footer>
         <p>© 2025 Nomadic Performance | Live Free, Thrive Wild</p>
     </footer>
+
+    <script>
+        const buttons = document.querySelectorAll('.category-btn');
+        const cards = document.querySelectorAll('.blog-card');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.getAttribute('data-category');
+                cards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

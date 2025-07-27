@@ -65,6 +65,24 @@ nav a:hover {
     animation: fadeIn 1.5s ease-in-out;
 }
 
+.hero2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 90vh;
+    position: relative;
+    color: #fff;
+    padding: 2rem;
+    animation: fadeIn 1.5s ease-in-out;
+    overflow-y: auto;       /* vertical scroll if needed */
+    overflow-x: hidden;     /* hide horizontal scroll */
+    border: 1px solid #ccc; /* optional styling */
+    padding: 10px;
+}
+
+
 .hero::after {
     content: '';
     position: absolute;
@@ -141,6 +159,80 @@ nav a:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
+.blog-content {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.blog-content h2 {
+    color: #00332c;
+}
+.blog-content p {
+    color: #333;
+    line-height: 1.6;
+}
+.blog-categories {
+    text-align: center;
+    margin: 20px;
+}
+.blog-categories button {
+    background-color: #00332c;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.blog-categories button.active {
+    background-color: #d97742;
+}
+.blog-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.blog-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+.blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.blog-card-content {
+    padding: 15px;
+}
+.blog-card-content h3 {
+    margin-top: 0;
+    color: #00332c;
+}
+.blog-card-content p {
+    color: #333;
+}
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #fff;
+    background-color: #00332c;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
 form {
     max-width: 400px;
     margin: 0 auto;
@@ -186,6 +278,13 @@ footer {
     to { opacity: 1; }
 }
 
+ul {
+    list-style-position: inside;
+    text-align: center;
+    color: #333;
+  }
+  
+
 @keyframes slideDown {
     from { transform: translateY(-30px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
@@ -203,3 +302,4 @@ footer {
         font-size: 1rem;
     }
 }
+
