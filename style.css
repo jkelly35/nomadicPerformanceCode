@@ -168,10 +168,10 @@ nav a:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 .blog-content h2 {
-    color: #00332c;
+    color: #040707;
 }
 .blog-content p {
-    color: #333;
+    color: #0a0505;
     line-height: 1.6;
 }
 .blog-categories {
@@ -281,7 +281,7 @@ footer {
 ul {
     list-style-position: inside;
     text-align: center;
-    color: #333;
+    color: #090303;
   }
   
 
