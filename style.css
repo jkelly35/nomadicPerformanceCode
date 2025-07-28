@@ -221,7 +221,7 @@ nav a:hover {
     color: #00332c;
 }
 .blog-card-content p {
-    color: #333;
+    color: #080303;
 }
 .read-more {
     display: inline-block;
@@ -281,7 +281,7 @@ footer {
 ul {
     list-style-position: inside;
     text-align: center;
-    color: #090303;
+    color: #080101;
   }
   
 
