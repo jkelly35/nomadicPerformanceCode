@@ -1,0 +1,326 @@
+/* ==========================
+   1. General Styles
+========================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #00332C;
+    color: #F5F5F5;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+ul {
+    list-style-position: inside;
+    text-align: center;
+    color: #080101;
+}
+
+/* ==========================
+   2. Header Styles
+========================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+nav a {
+    color: #F5F5F5;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #FFDAB9;
+}
+
+/* ==========================
+   3. Hero Section
+========================== */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 90vh;
+    background: url('Media/landscapeBackground.png') no-repeat center center/cover;
+    position: relative;
+    color: #fff;
+    padding: 2rem;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    animation: slideDown 1s ease-out;
+}
+
+.hero p {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* ==========================
+   4. Buttons
+========================== */
+.cta-button {
+    display: inline-block;
+    background-color: #D97742;
+    color: #F5F5F5;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    margin-top: 1.5rem;
+    font-weight: 700;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.08);
+    background-color: #e08b5a;
+}
+
+/* ==========================
+   5. Section Styles
+========================== */
+.highlights, .content {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: #00332C;
+}
+
+.service-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.service-card {
+    background: #D97742;
+    padding: 1.5rem;
+    border-radius: 12px;
+    flex: 1 1 250px;
+    max-width: 300px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================
+   6. Blog Section
+========================== */
+.blog-content {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.blog-content h2 {
+    color: #040707;
+}
+.blog-content p {
+    color: #0a0505;
+    line-height: 1.6;
+}
+.blog-categories {
+    text-align: center;
+    margin: 20px;
+}
+.blog-categories button {
+    background-color: #00332c;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.blog-categories button.active {
+    background-color: #d97742;
+}
+.blog-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.blog-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+.blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.blog-card-content {
+    padding: 15px;
+}
+.blog-card-content h3 {
+    margin-top: 0;
+    color: #00332c;
+}
+.blog-card-content p {
+    color: #080303;
+}
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #fff;
+    background-color: #00332c;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+/* ==========================
+   7. FAQ Section
+========================== */
+.faq {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    color: #555;
+}
+
+.faq h2 {
+    font-size: 28px;
+    color: #00332c;
+    margin-bottom: 20px;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-item h3 {
+    font-size: 18px;
+    color: #00332c;
+    margin-bottom: 5px;
+}
+
+.faq-item p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* ==========================
+   8. Footer
+========================== */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #D97742;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.social-media {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
+
+/* ==========================
+   9. Animations
+========================== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ==========================
+   10. Responsive Design
+========================== */
+@media (max-width: 768px) {
+    .service-list {
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+}
