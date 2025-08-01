@@ -1,12 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programs - Nomadic Performance</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+
     <header>
         <div class="logo">
             <img src="Media/logo1.png" alt="Nomadic Performance Logo">
@@ -22,39 +17,83 @@
             <a href="contact.html">Contact</a>
         </nav>
     </header>
-    
-<section class="hero">
-    <div class="hero-content">
-        <h2>Our Training Programs</h2>
-        <p>Explore our range of sport-specific training programs designed to help you perform at your best, prevent injuries, and thrive in your outdoor adventures.</p>
-       <br>
-       <div class="service-list">
-        <div class="service-card">
-            <h3>2025/26 Ski Prep Program</h3>
-            <p>Get ready for the ski season with our comprehensive 12-week program designed to build strength, endurance, and agility specific to skiing.
-                <br><h4>(COMING SOON)</h4>
-            </p>
+
+
+    <section class="hero">
+        <div="hero-content">
+            <h2>Nomadic Performance Blog</h2>
+            <p>Explore our Training Programs</p>
+            <a href="contact.html" class="cta-button">Get in Touch</a>
         </div>
-           
-        
-    </div>
-</section>
-<section class="content">
-    <h1>Why Choose Our Programs?</h1>
-    <br>
-    <h2>At Nomadic Performance, we understand the unique demands of outdoor sports. Our training programs are designed by experts in physical therapy and strength coaching, ensuring you get the best guidance for:</h2>
-    <br>
-    <ul>
-        <li><h2>Improving strength and endurance</h2></li>
-        <li><h2>Enhancing mobility and flexibility</h2></li>
-        <li><h2>Preventing common injuries in climbing, skiing, biking, and more</h2></li>
-        <li><h2>Optimizing performance for your specific sport</h2></li>
-        <li><h2>Training effectively, no matter where you are in the world</h2></li>
-    </ul>    
-   <br>
-  
+    </section>
+   
+    <section class="highlights">
+        <h2>Nomadic Performance</h2>
+        <p>Discover the right training program for you</p>
+        <div class="blog-list">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Nomadic Performance</title>
+    <link rel="stylesheet" href="style.css">
+    </section>
+
+</head>
+<body>
+    <section class="blog-categories">
+        <button class="category-btn active" data-category="all">All</button>
+        <button class="category-btn" data-category="skiing">Skiing</button>
+        <button class="category-btn" data-category="climbing">Climbing</button>
+        <button class="category-btn" data-category="hiking">Hiking</button>
+        <button class="category-btn" data-category="snowboarding">Snowboarding</button>
+        <button class="category-btn" data-category="biking">Mountain Biking</button>
+    </section>
+
+    <div class="blog-section">
+        <div class="blog-section">
+            <div class="blog-card" data-category="skiing">
+                <img src="/Media/skier1.png" alt="Skiing Program">
+                <div class="blog-card-content">
+                    <h3>15 Week Ski Prep</h3>
+                    <p>15-Week Ski Season Preparation Strength and Conditioning Program </p>
+                    <a href="" class="read-more">View program</a>
+                </div>
+            </div>
+    
+                    <div class="blog-card" data-category="skiing">
+                        <img src="/Media/skier2.png" alt="Skiing Program">
+                        <div class="blog-card-content">
+                            <h3>15 Week Ski Prep</h3>
+                            <p>15-Week Ski Season Preparation Strength and Conditioning Program </p>
+                            <a href="" class="read-more">View program</a>
+                        </div>
+                </div>
+</div>
+
+</div>
+    </section>
     <footer>
         <p>© 2025 Nomadic Performance | Live Free, Thrive Wild</p>
     </footer>
+
+    <script>
+        const buttons = document.querySelectorAll('.category-btn');
+        const cards = document.querySelectorAll('.blog-card');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.getAttribute('data-category');
+                cards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

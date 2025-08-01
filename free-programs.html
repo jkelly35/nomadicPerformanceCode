@@ -1,12 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Starter Programs - Nomadic Performance</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+
     <header>
         <div class="logo">
             <img src="Media/logo1.png" alt="Nomadic Performance Logo">
@@ -23,46 +18,71 @@
         </nav>
     </header>
 
+
     <section class="hero">
-        <h2>Gain Access to a Free Demo of our Programs</h2>
-        <p>Get the first 3 weeks of our sport-specific training programs for free! Click on the Training Program you are interested in below to be re-directed to sign up for the Free Trial Program on BridgeAthletic.</p>
-        
-       <br>
+        <div="hero-content">
+            <h2>Nomadic Performance Free Programs</h2>
+            <p>Explore our Training Programs</p>
+        </div>
+    </section>
+   
+    <section class="highlights">
+        <h2>Free Program Demo's</h2>
+        <p>Access Free Demo's of Some of our Most Popular Training Programs</p>
+        <div class="blog-list">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Nomadic Performance</title>
+    <link rel="stylesheet" href="style.css">
+    </section>
+
+</head>
+    <div class="blog-section">
+        <div class="blog-section">
+            <div class="blog-card" data-category="skiing">
+                <img src="/Media/skier1.png" alt="Skiing Program">
+                <div class="blog-card-content">
+                    <h3>Ski Prep Program Demo</h3>
+                    <p>Demo Program </p>
+                    <a href="" class="read-more">Access program</a>
+                </div>
+            </div>
     
+                    <div class="blog-card" data-category="skiing">
+                        <img src="/Media/skier2.png" alt="Skiing Program">
+                        <div class="blog-card-content">
+                            <h3>Snowboarding Prep Program Demo</h3>
+                            <p>Demo Program </p>
+                            <a href="" class="read-more">Access program</a>
+                        </div>
+                </div>
+</div>
 
-       <br>
+</div>
+    </section>
+    <footer>
+        <p>© 2025 Nomadic Performance | Live Free, Thrive Wild</p>
+    </footer>
 
-       <!-- CTA Button linking to BridgeAthletic -->
-       <div style="text-align: center;">
-           <a href="YOUR_BRIDGEATHLETIC_LINK_HERE" target="_blank" 
-              style="display: inline-block; background-color: #00332c; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">
-               Ski Season Prep 3-Week Demo <h3>(COMING SOON)</h3>
-           </a>
-       </div>
-       <br>
-       <div style="text-align: center;">
-        <a href="YOUR_BRIDGEATHLETIC_LINK_HERE" target="_blank" 
-           style="display: inline-block; background-color: #00332c; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">
-            Snowboarding Season Prep 3-Week Demo <h3>(COMING SOON)</h3>
-        </a>
-    </div>
-    <br>
-       <div style="text-align: center;">
-        <a href="YOUR_BRIDGEATHLETIC_LINK_HERE" target="_blank" 
-           style="display: inline-block; background-color: #00332c; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">
-            Climbing Prep 3-Week Demo <h3>(COMING SOON)</h3>
-        </a>
-    </div>
-    <br>
-       <div style="text-align: center;">
-        <a href="YOUR_BRIDGEATHLETIC_LINK_HERE" target="_blank" 
-           style="display: inline-block; background-color: #00332c; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px;">
-            MTB Prep 3-Week Demo <h3>(COMING SOON)</h3>
-        </a>
-    </div>      
-   </section>
-   <footer>
-    <p>© 2025 Nomadic Performance | Live Free, Thrive Wild</p>
-</footer>
+    <script>
+        const buttons = document.querySelectorAll('.category-btn');
+        const cards = document.querySelectorAll('.blog-card');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.getAttribute('data-category');
+                cards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
