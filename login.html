@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Nomadic Performance</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="Media/logo1.png" alt="Nomadic Performance Logo"/>
+      <h1>Nomadic Performance</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="programs.html">Programs</a>
+      <a href="blog.html">Blog</a>
+      <a href="free-programs.html">Free Programs</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero hero--compact">
+    <h2>Welcome Back</h2>
+    <p>Log in to access your dashboard, programs, and progress.</p>
+  </section>
+
+  <main class="auth-wrapper">
+    <section class="auth-card">
+      <h3>Login</h3>
+
+      <form id="loginForm" novalidate>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email"/>
+          <small class="field-hint">Use the email you signed up with.</small>
+        </div>
+
+        <div class="form-row">
+          <label for="password">Password</label>
+          <div class="password-field">
+            <input id="password" name="password" type="password" placeholder="••••••••" required minlength="6" autocomplete="current-password"/>
+            <button class="toggle-password" type="button" aria-label="Show password" title="Show password">Show</button>
+          </div>
+        </div>
+
+        <div class="form-row form-row--inline">
+          <label class="checkbox">
+            <input type="checkbox" id="remember" name="remember"/>
+            <span>Remember me</span>
+          </label>
+          <a class="link-small" href="reset-password.html">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="cta-button cta-button--full">Log In</button>
+
+        <p class="form-footnote">
+          Don’t have an account? <a href="signup.html">Create one</a>
+        </p>
+
+        <div id="formMessage" class="form-message" role="alert" aria-live="polite" hidden></div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Nomadic Performance | Live Free, Thrive Wild</p>
+    <div class="social-media">
+      <a href="https://www.instagram.com/nomadicperformanceco/" target="_blank" rel="noopener noreferrer">
+        <img src="Media/instagram-icon.png" alt="Instagram" class="social-icon"/>
+      </a>
+      <a href="https://x.com/nomadperformco?s=21" target="_blank" rel="noopener noreferrer">
+        <img src="Media/x-icon.png" alt="Twitter" class="social-icon"/>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Your config (URL + anon key) -->
+  <script src="js/supabase-config.js"></script>
+
+  <!-- Supabase v2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // Apply top padding so hero clears the header (same as Home)
+    document.addEventListener("DOMContentLoaded", () => {
+      const header = document.querySelector("header");
+      const hero = document.querySelector(".hero");
+      hero.style.paddingTop = header.offsetHeight + "px";
+    });
+
+    // Show/hide password
+    (function () {
+      const btn = document.querySelector(".toggle-password");
+      const pw = document.getElementById("password");
+      if (!btn || !pw) return;
+      btn.addEventListener("click", () => {
+        const isHidden = pw.type === "password";
+        pw.type = isHidden ? "text" : "password";
+        btn.textContent = isHidden ? "Hide" : "Show";
+        btn.setAttribute("aria-label", isHidden ? "Hide password" : "Show password");
+      });
+    })();
+
+    // Create two Supabase clients:
+    // - localStorage: persists across browser restarts ("Remember me")
+    // - sessionStorage: ends when the tab/browser closes
+    const supabaseLocal = window.supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_ANON_KEY,
+      {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true, // useful if you also support OAuth/email links
+          storage: window.localStorage
+        }
+      }
+    );
+
+    const supabaseSession = window.supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_ANON_KEY,
+      {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true,
+          storage: window.sessionStorage
+        }
+      }
+    );
+
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("formMessage");
+
+    function showMessage(text, type = "error") {
+      message.textContent = text;
+      message.hidden = false;
+      message.classList.remove("success", "error");
+      message.classList.add(type);
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      message.hidden = true;
+
+      const email = form.email.value.trim();
+      const password = form.password.value;
+      const remember = form.remember.checked;
+
+      if (!email || !password) {
+        showMessage("Please enter both email and password.");
+        return;
+      }
+      if (!/^\S+@\S+\.\S+$/.test(email)) {
+        showMessage("Please enter a valid email address.");
+        return;
+      }
+
+      try {
+        const client = remember ? supabaseLocal : supabaseSession;
+
+        const { data, error } = await client.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) {
+          // Common helpful messages
+          if (/Email not confirmed/i.test(error.message)) {
+            showMessage("Please confirm your email before logging in. Check your inbox.", "error");
+          } else if (/Invalid login credentials/i.test(error.message)) {
+            showMessage("Invalid email or password. Please try again.", "error");
+          } else {
+            showMessage(error.message || "Login failed. Please try again.");
+          }
+          return;
+        }
+
+        // Success
+        showMessage("Login successful. Redirecting…", "success");
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 400);
+      } catch (err) {
+        showMessage(err.message || "Login failed. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>

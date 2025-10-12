@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Nomadic Performance</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* Helper styles */
+    .screen-center { display:flex; align-items:center; justify-content:center; min-height:40vh; text-align:center; }
+    .muted { color:#666; }
+
+    /* Cards Grid */
+    .metrics-wrap { margin-top: 1rem; display:grid; gap: 1rem; }
+    @media (min-width: 768px){ .metrics-wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1100px){ .metrics-wrap { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+    .metric-card {
+      position: relative;
+      border-radius: 18px;
+      padding: 1rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.95));
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.05);
+      display:flex; flex-direction:column; gap:.6rem;
+      min-height: 170px;
+    }
+    .metric-card h4 {
+      margin: 0; font-size: 1.05rem; letter-spacing:.2px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .metric-grid {
+      display:grid; grid-template-columns: 1fr; gap:.55rem; margin-top:.25rem;
+    }
+    .metric-item {
+      background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 12px; padding:.6rem .7rem;
+      display:flex; align-items: center; justify-content: space-between;
+    }
+    .metric-item .label { font-weight:600; }
+    .metric-item .value { font-variant-numeric: tabular-nums; opacity:.9; }
+    .metric-actions {
+      display:flex; gap:.4rem; opacity:.9;
+    }
+    .chip {
+      font-size:.78rem; padding:.2rem .5rem; border-radius: 999px;
+      background: rgba(0,0,0,0.06); color:#444; border:1px solid rgba(0,0,0,0.05);
+    }
+    .cta-mini {
+      background: transparent; border:1px dashed rgba(0,0,0,0.25);
+      padding:.35rem .55rem; border-radius:10px; cursor:pointer; font-size:.85rem;
+    }
+    .cta-mini:hover { background: rgba(0,0,0,0.03); }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1rem; }
+    .user-chip { font-size:.95rem; opacity:.85; }
+
+    /* Color accents for groups */
+    .accent-body h4 { color:#0f766e; }         /* teal */
+    .accent-cardio h4 { color:#7c3aed; }       /* violet */
+    .accent-strength h4 { color:#b45309; }     /* amber */
+    .accent-recovery h4 { color:#2563eb; }     /* blue */
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="Media/logo1.png" alt="Nomadic Performance Logo"/>
+      <h1>Nomadic Performance</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="programs.html">Programs</a>
+      <a href="blog.html">Blog</a>
+      <a href="free-programs.html">Free Programs</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero hero--compact">
+    <h2>Your Dashboard</h2>
+    <p class="muted" id="statusLine">Checking your session…</p>
+  </section>
+
+  <main class="auth-wrapper">
+    <!-- Gate (shown while loading or if not signed in) -->
+    <div id="gate" class="screen-center">
+      <div>
+        <div id="gateMsg" class="muted">Loading…</div>
+        <div style="margin-top:.75rem;">
+          <button id="toLogin" class="cta-button" style="display:none;">Go to Login</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- App (hidden until authenticated) -->
+    <section id="app" class="auth-card" style="display:none;">
+      <div class="topbar">
+        <div class="user-chip">Signed in as <strong id="userWho">—</strong></div>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+          <button id="btnReload" class="cta-button">Reload</button>
+          <button id="btnSignOut" class="cta-button">Sign Out</button>
+        </div>
+      </div>
+
+      <!-- ======= Cards Grid ======= -->
+      <div class="metrics-wrap" id="cardsGrid">
+        <!-- Body -->
+        <div class="metric-card accent-body" data-group="body">
+          <h4>Body Metrics <span class="chip">manual</span></h4>
+          <div class="metric-grid">
+            <div class="metric-item" data-key="weight">
+              <span class="label">Weight</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+            <div class="metric-item" data-key="height">
+              <span class="label">Height</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+            <div class="metric-item" data-key="body_fat_pct">
+              <span class="label">% Body Fat</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+            <div class="metric-item" data-key="bmi">
+              <span class="label">BMI</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cardiovascular -->
+        <div class="metric-card accent-cardio" data-group="cardio">
+          <h4>Cardiovascular <span class="chip">manual</span></h4>
+          <div class="metric-grid">
+            <div class="metric-item" data-key="resting_hr">
+              <span class="label">Resting HR</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+            <div class="metric-item" data-key="hr_max">
+              <span class="label">HR Max</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+            <div class="metric-item" data-key="vo2max">
+              <span class="label">VO₂max</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+            <div class="metric-item" data-key="hr_recovery">
+              <span class="label">HR Recovery</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Strength / Power -->
+        <div class="metric-card accent-strength" data-group="strength">
+          <h4>Strength / Power <span class="chip">manual</span></h4>
+          <div class="metric-grid">
+            <div class="metric-item" data-key="vertical_jump_cm">
+              <span class="label">Vertical Jump (cm)</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+            <div class="metric-item" data-key="grip_strength_kg">
+              <span class="label">Grip Strength (kg)</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+            <div class="metric-item" data-key="power_output_w">
+              <span class="label">Power Output (W)</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+            <div class="metric-item" data-key="lactate_threshold_w">
+              <span class="label">Lactate Threshold (W)</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recovery -->
+        <div class="metric-card accent-recovery" data-group="recovery">
+          <h4>Recovery <span class="chip">manual</span></h4>
+          <div class="metric-grid">
+            <div class="metric-item" data-key="sleep_hours">
+              <span class="label">Sleep (hrs)</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+            <div class="metric-item" data-key="hrv_ms">
+              <span class="label">HRV (ms)</span>
+              <div class="metric-actions">
+                <span class="value" data-value>-</span>
+                <button class="cta-mini" data-edit>Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ======= /Cards Grid ======= -->
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Nomadic Performance | Live Free, Thrive Wild</p>
+    <div class="social-media">
+      <a href="https://www.instagram.com/nomadicperformanceco/" target="_blank" rel="noopener">
+        <img src="Media/instagram-icon.png" alt="Instagram" class="social-icon"/>
+      </a>
+      <a href="https://x.com/nomadperformco?s=21" target="_blank" rel="noopener">
+        <img src="Media/x-icon.png" alt="Twitter" class="social-icon"/>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Order matters -->
+  <script src="js/supabase-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Layout fix like your Home page
+    document.addEventListener("DOMContentLoaded", () => {
+      const header = document.querySelector("header");
+      const hero = document.querySelector(".hero");
+      hero.style.paddingTop = header.offsetHeight + "px";
+    });
+
+    // Guards for setup issues
+    if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
+      console.error("Supabase config missing — edit js/supabase-config.js");
+      document.getElementById("gateMsg").textContent = "Missing Supabase config.";
+      const btn = document.getElementById("toLogin");
+      btn.style.display = "inline-block";
+      btn.onclick = () => location.href = "login.html";
+      throw new Error("Missing Supabase config");
+    }
+    if (!window.supabase) {
+      console.error("Supabase library failed to load");
+      document.getElementById("gateMsg").textContent = "Supabase library failed to load.";
+      throw new Error("Supabase library missing");
+    }
+
+    // Create clients for both storage types (Remember me vs session-only)
+    const makeClient = (storage) =>
+      window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY, {
+        auth: { persistSession:true, autoRefreshToken:true, detectSessionInUrl:true, storage }
+      });
+    const sbLocal   = makeClient(window.localStorage);
+    const sbSession = makeClient(window.sessionStorage);
+
+    async function getActiveSession() {
+      let { data:{ session }, error } = await sbLocal.auth.getSession();
+      if (error) console.warn("Local session error:", error);
+      if (session) return { session, client: sbLocal };
+
+      ({ data:{ session }, error } = await sbSession.auth.getSession());
+      if (error) console.warn("SessionStorage session error:", error);
+      if (session) return { session, client: sbSession };
+
+      return { session:null, client:null };
+    }
+
+    // Map of friendly labels (optional if you later render from DB dynamically)
+    const METRIC_LABELS = {
+      weight: "Weight", height: "Height", body_fat_pct: "% Body Fat", bmi: "BMI",
+      resting_hr: "Resting HR", hr_max: "HR Max", vo2max: "VO₂max", hr_recovery: "HR Recovery",
+      vertical_jump_cm: "Vertical Jump (cm)", grip_strength_kg: "Grip Strength (kg)", power_output_w: "Power Output (W)", lactate_threshold_w: "Lactate Threshold (W)",
+      sleep_hours: "Sleep (hrs)", hrv_ms: "HRV (ms)"
+    };
+
+    // Render fetched metrics (use most recent per metric_key)
+    function renderMetrics(rows) {
+      // Reduce to latest per key
+      const latest = {};
+      for (const r of rows) {
+        const k = r.metric_key;
+        const t = new Date(r.recorded_at).getTime();
+        if (!latest[k] || t > latest[k]._t) {
+          latest[k] = { value: r.metric_value_numeric ?? r.metric_value_text ?? "-", _t: t };
+        }
+      }
+
+      // Fill into DOM
+      document.querySelectorAll(".metric-item").forEach(item => {
+        const key = item.getAttribute("data-key");
+        const valSpan = item.querySelector("[data-value]");
+        const v = latest[key]?.value ?? "-";
+        valSpan.textContent = v;
+      });
+    }
+
+    // Upsert a metric value
+    async function saveMetric(client, userId, group, key, value) {
+      // Decide numeric vs text
+      const num = Number(value);
+      const isNumeric = !isNaN(num) && value !== "";
+      const payload = {
+        user_id: userId,
+        metric_group: group,
+        metric_key: key,
+        recorded_at: new Date().toISOString()
+      };
+      if (isNumeric) {
+        payload.metric_value_numeric = num;
+        payload.metric_value_text = null;
+      } else {
+        payload.metric_value_numeric = null;
+        payload.metric_value_text = String(value);
+      }
+
+      const { error } = await client.from("user_metrics").insert(payload);
+      if (error) throw error;
+    }
+
+    async function init() {
+      const gate = document.getElementById("gate");
+      const app  = document.getElementById("app");
+      const gateMsg = document.getElementById("gateMsg");
+      const statusLine = document.getElementById("statusLine");
+      const userWho = document.getElementById("userWho");
+
+      gateMsg.textContent = "Checking your session…";
+      statusLine.textContent = "Checking your session…";
+
+      const { session, client } = await getActiveSession();
+
+      if (!session) {
+        gateMsg.textContent = "You're not signed in.";
+        const btn = document.getElementById("toLogin");
+        btn.style.display = "inline-block";
+        btn.onclick = () => location.href = "login.html";
+        statusLine.textContent = "Not signed in.";
+        return;
+      }
+
+      // Show app
+      const email = session.user?.email || "User";
+      userWho.textContent = email;
+      gate.style.display = "none";
+      app.style.display = "block";
+      statusLine.textContent = "Signed in.";
+
+      // Load metrics
+      const { data: rows, error } = await client
+        .from("user_metrics")
+        .select("*")
+        .eq("user_id", session.user.id)
+        .order("recorded_at", { ascending: false })
+        .limit(200);
+
+      if (error) {
+        console.warn("Metric fetch error:", error);
+      } else {
+        renderMetrics(rows || []);
+      }
+
+      // Edit handlers
+      document.querySelectorAll("[data-edit]").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const item = btn.closest(".metric-item");
+          const card = btn.closest(".metric-card");
+          const key = item.getAttribute("data-key");
+          const group = card.getAttribute("data-group");
+          const label = METRIC_LABELS[key] || key;
+          const currentVal = item.querySelector("[data-value]")?.textContent ?? "";
+
+          const next = prompt(`Enter new value for "${label}":`, currentVal === "-" ? "" : currentVal);
+          if (next === null) return; // cancelled
+
+          try {
+            await saveMetric(client, session.user.id, group, key, next.trim());
+            // Refresh just this value in UI (optimistic)
+            item.querySelector("[data-value]").textContent = next.trim() || "-";
+          } catch (e) {
+            alert(e.message || "Could not save metric.");
+          }
+        });
+      });
+
+      // Buttons
+      document.getElementById("btnSignOut").onclick = async () => {
+        await Promise.allSettled([sbLocal.auth.signOut(), sbSession.auth.signOut()]);
+        location.href = "login.html";
+      };
+      document.getElementById("btnReload").onclick = () => location.reload();
+
+      // Optional: If you have a profiles table, you could hydrate name:
+      // const { data: profile } = await client.from("profiles").select("full_name").eq("id", session.user.id).maybeSingle();
+      // userWho.textContent = profile?.full_name || email;
+    }
+
+    // React to auth events
+    sbLocal.auth.onAuthStateChange((evt) => {
+      if (evt === "SIGNED_OUT") location.href = "login.html";
+      if (evt === "SIGNED_IN" || evt === "TOKEN_REFRESHED") init();
+    });
+    sbSession.auth.onAuthStateChange((evt) => {
+      if (evt === "SIGNED_OUT") location.href = "login.html";
+      if (evt === "SIGNED_IN" || evt === "TOKEN_REFRESHED") init();
+    });
+
+    init().catch(err => {
+      console.error(err);
+      document.getElementById("gateMsg").textContent = "Error loading dashboard. See console.";
+    });
+  </script>
+</body>
+</html>
