@@ -1,0 +1,240 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Blog post styles */
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+	color: #1a3a2a !important;
+	font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+}
+
+/* Override any blue link colors in blog content */
+.blog-content h1 a,
+.blog-content h2 a,
+.blog-content h3 a,
+.blog-content h4 a,
+.blog-content h5 a,
+.blog-content h6 a {
+	color: #1a3a2a !important;
+	text-decoration: none !important;
+}
+
+.blog-content h1 {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+	margin-top: 2rem;
+}
+.blog-content h2 {
+	font-size: 2rem;
+	font-weight: 600;
+	margin-bottom: 0.8rem;
+	margin-top: 1.8rem;
+}
+.blog-content h3 {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin-bottom: 0.6rem;
+	margin-top: 1.5rem;
+}
+.blog-content h4 {
+	font-size: 1.3rem;
+	font-weight: 600;
+	margin-bottom: 0.6rem;
+	margin-top: 1.3rem;
+}
+.blog-content h5 {
+	font-size: 1.2rem;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+	margin-top: 1.2rem;
+}
+.blog-content h6 {
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+	margin-top: 1.1rem;
+}
+.blog-content p {
+	margin-bottom: 1.5rem;
+}
+.blog-content ul, .blog-content ol {
+	margin-bottom: 1.5rem;
+	padding-left: 2rem;
+}
+.blog-content li {
+	margin-bottom: 0.5rem;
+}
+.blog-content blockquote {
+	border-left: 4px solid #1a3a2a;
+	padding-left: 1rem;
+	margin: 1.5rem 0;
+	font-style: italic;
+	color: #555;
+}
+.blog-content code {
+	background: #f4f4f4;
+	padding: 0.2rem 0.4rem;
+	border-radius: 3px;
+	font-family: 'Monaco', monospace;
+}
+.blog-content pre {
+	background: #f4f4f4;
+	padding: 1rem;
+	border-radius: 5px;
+	overflow-x: auto;
+	margin: 1.5rem 0;
+}
+
+/* No global Tailwind utility classes here. Use in JSX only. */
+
+/* Navigation link hover effects */
+.nav-link:hover {
+  color: #ccc !important;
+}
+
+/* Post card hover effects */
+.post-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Subscribe button hover effects */
+.subscribe-btn:hover:not(:disabled) {
+  background: #f0f0f0 !important;
+}
+
+/* 404 page button hover effects */
+.btn-home:hover {
+  transform: translateY(-2px) !important;
+}
+
+.btn-blog:hover {
+  background: rgba(255,255,255,0.3) !important;
+}
+
+.nav-card:hover {
+  background: #2d5a3d !important;
+}
+
+.social-link:hover {
+  opacity: 0.8 !important;
+}
+
+/* Navigation search bar - hidden on mobile */
+.nav-search {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav-search {
+    display: block;
+  }
+}
+
+/* Mobile Navigation Styles */
+.mobile-menu-btn {
+  display: block !important;
+}
+
+.desktop-nav {
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-btn {
+    display: none !important;
+  }
+
+  .desktop-nav {
+    display: flex !important;
+  }
+}
+
+/* Mobile responsive typography */
+@media (max-width: 767px) {
+  /* Hero section mobile adjustments */
+  .hero-title {
+    font-size: 2.2rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem !important;
+  }
+
+  /* Blog post headings mobile */
+  .blog-content h1 {
+    font-size: 2rem !important;
+  }
+
+  .blog-content h2 {
+    font-size: 1.6rem !important;
+  }
+
+  .blog-content h3 {
+    font-size: 1.3rem !important;
+  }
+
+  /* General mobile spacing */
+  .mobile-padding {
+    padding: 2rem 1rem !important;
+  }
+
+  .mobile-margin {
+    margin: 1rem !important;
+  }
+
+  /* Mobile navigation improvements */
+  nav {
+    padding: 1rem 1rem !important;
+  }
+
+  /* Footer mobile adjustments */
+  footer {
+    padding: 2rem 1rem !important;
+    text-align: center !important;
+  }
+
+  /* Form elements mobile */
+  input, textarea, select, button {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+
+  /* Grid layouts for mobile */
+  .mobile-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Card layouts for mobile */
+  .mobile-card {
+    margin: 0 0.5rem 1rem 0.5rem !important;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .blog-content h1 {
+    font-size: 2.2rem !important;
+  }
+
+  .blog-content h2 {
+    font-size: 1.8rem !important;
+  }
+}
+
+/* CTA Button hover effects */
+.cta-button:hover {
+  background: #2d5a3d !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(26,58,42,0.3);
+}
