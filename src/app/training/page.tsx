@@ -23,6 +23,7 @@ export default async function TrainingPage() {
   ])
 
   // Calculate weekly workout stats
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
   const weeklyStats = await supabase
     .from('workouts')
     .select('duration_minutes')
