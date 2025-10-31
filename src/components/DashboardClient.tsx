@@ -597,44 +597,6 @@ function DashboardContent({
               </div>
             </div>
 
-            {/* Nutrition Access */}
-            <div style={{
-              background: '#f8f9fa',
-              borderRadius: '12px',
-              padding: '2rem',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
-              border: '1px solid #e9ecef',
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🍎</div>
-              <h3 style={{
-                fontSize: '1.5rem',
-                fontWeight: 600,
-                color: '#1a3a2a',
-                marginBottom: '1rem'
-              }}>
-                Nutrition Tracking
-              </h3>
-              <p style={{
-                color: '#666',
-                marginBottom: '1.5rem'
-              }}>
-                Track your meals, manage your food database, and monitor your nutrition goals.
-              </p>
-              <Link href="/nutrition" style={{
-                display: 'inline-block',
-                padding: '0.75rem 1.5rem',
-                background: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
-                color: '#fff',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                fontSize: '1rem',
-                fontWeight: 'bold',
-                transition: 'transform 0.2s'
-              }}>
-                Manage Nutrition
-              </Link>
-            </div>
           </div>
 
           {/* Main Dashboard Grid */}
